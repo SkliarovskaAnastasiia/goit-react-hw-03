@@ -29,7 +29,7 @@ export default function ContactForm({ onSubmit }) {
       onSubmit={(values, action) => {
         const newContact = { id: nanoid(), ...values };
         onSubmit(newContact);
-        console.log(newContact);
+
         action.resetForm();
       }}
       validationSchema={formValidation}

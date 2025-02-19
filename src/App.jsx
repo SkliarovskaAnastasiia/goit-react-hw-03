@@ -4,6 +4,7 @@ import './App.css';
 import ContactForm from './components/contactForm/ContactForm';
 import SearchBox from './components/searchBox/SearchBox';
 import ContactList from './components/contactList/ContactList';
+import Options from './components/options/Options';
 import contactsData from './contacts.json';
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
     return JSON.parse(contactsData);
   });
   const [filter, setFilter] = useState('');
-
-  console.log(contacts);
+  const [openForm, setOpenForm] = useState(false);
+  const [openSearchBox, setOpenSearchBox] = useState(false);
 
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().startsWith(filter.toLowerCase())
@@ -37,12 +38,21 @@ function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
+  const onOpenForm = () => {
+    setOpenForm(!openForm);
+    if (openSearchBox) setOpenSearchBox(!openSearchBox);
+  };
+  const onOpenSearchBox = () => {
+    setOpenSearchBox(!openSearchBox);
+    if (openForm) setOpenForm(!openForm);
+  };
+
   return (
     <>
       <h1>Phonebook</h1>
-
-      <ContactForm onSubmit={addContact} />
-      <SearchBox value={filter} onFilter={setFilter} />
+      <Options onForm={onOpenForm} onSearchBoxbox={onOpenSearchBox} />
+      {openForm && <ContactForm onSubmit={addContact} />}
+      {openSearchBox && <SearchBox value={filter} onFilter={setFilter} />}
       <ContactList items={filteredContacts} onDelete={deleteContact} />
     </>
   );
