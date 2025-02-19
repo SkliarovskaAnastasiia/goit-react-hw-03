@@ -12,7 +12,7 @@ function App() {
     const data = window.localStorage.getItem('contacts');
 
     if (data !== null) return JSON.parse(data);
-    return JSON.parse(contactsData);
+    return contactsData;
   });
   const [filter, setFilter] = useState('');
   const [openForm, setOpenForm] = useState(false);
