@@ -4,7 +4,7 @@ import css from './Contact.module.css';
 
 export default function Contact({ contact: { id, name, number }, onClick }) {
   return (
-    <li className={css.contactItem}>
+    <>
       <div className={css.contactInfoWrappper}>
         <p className={css.contactInfo}>
           <PiUser size={20} /> {name}
@@ -23,6 +23,6 @@ export default function Contact({ contact: { id, name, number }, onClick }) {
       >
         Delete
       </button>
-    </li>
+    </>
   );
 }
