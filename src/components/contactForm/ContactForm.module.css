@@ -9,14 +9,19 @@
   padding: 14px;
 }
 
-.formLabel {
+.nameLabel,
+.numberLabel {
   text-align: left;
   font-weight: 500;
 }
 
+.numberLabel {
+  margin-top: 14px;
+}
+
 .formField {
   padding: 6px;
-  margin-bottom: 14px;
+
   border: 1px solid #213547;
   border-radius: 4px;
   outline: transparent;
@@ -30,5 +35,11 @@
 
 .formBtn {
   width: 146px;
-  margin: 0 auto;
+  margin: 14px auto 0;
+}
+
+.errorMessage {
+  text-align: left;
+  font-size: 12px;
+  color: rgb(249, 107, 107);
 }

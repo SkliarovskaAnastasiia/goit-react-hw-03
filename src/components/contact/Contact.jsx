@@ -1,8 +1,8 @@
-import { PiUser } from "react-icons/pi";
-import { PiPhone } from "react-icons/pi";
-import css from "./Contact.module.css";
+import { PiUser } from 'react-icons/pi';
+import { PiPhone } from 'react-icons/pi';
+import css from './Contact.module.css';
 
-export default function Contact({ contact: { name, number } }) {
+export default function Contact({ contact: { id, name, number }, onClick }) {
   return (
     <li className={css.contactItem}>
       <div className={css.contactInfoWrappper}>
@@ -14,7 +14,13 @@ export default function Contact({ contact: { name, number } }) {
         </p>
       </div>
 
-      <button className={css.contactBtn} type="button">
+      <button
+        className={css.contactBtn}
+        type="button"
+        onClick={() => {
+          onClick(id);
+        }}
+      >
         Delete
       </button>
     </li>

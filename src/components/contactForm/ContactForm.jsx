@@ -1,33 +1,69 @@
-import { Field, Formik, Form } from "formik";
-import { useId } from "react";
-import css from "./ContactForm.module.css";
+import { Field, Formik, Form } from 'formik';
+import { ErrorMessage } from 'formik';
+import { useId } from 'react';
+import css from './ContactForm.module.css';
+import { nanoid } from 'nanoid';
+import * as Yup from 'yup';
 
-export default function ContactForm() {
+const formValidation = Yup.object().shape({
+  name: Yup.string()
+    .min(3, 'Too short!')
+    .max(50, 'Too long!')
+    .required('Required'),
+  number: Yup.string()
+    .min(3, 'Too short!')
+    .max(50, 'Too long!')
+    .required('Required'),
+});
+
+export default function ContactForm({ onSubmit }) {
   const nameId = useId();
   const numberId = useId();
 
   return (
-    <Formik initialValues={[]} onSubmit={() => {}}>
+    <Formik
+      initialValues={{
+        name: '',
+        number: '',
+      }}
+      onSubmit={(values, action) => {
+        const newContact = { id: nanoid(), ...values };
+        onSubmit(newContact);
+        console.log(newContact);
+        action.resetForm();
+      }}
+      validationSchema={formValidation}
+    >
       <Form className={css.contactForm}>
-        <label className={css.formLabel} htmlFor={nameId}>
+        <label className={css.nameLabel} htmlFor={nameId}>
           Name
         </label>
         <Field
           className={css.formField}
           type="text"
-          name="fullName"
+          name="name"
           id={nameId}
         ></Field>
+        <ErrorMessage
+          className={css.errorMessage}
+          name="name"
+          component="span"
+        />
 
-        <label className={css.formLabel} htmlFor={numberId}>
+        <label className={css.numberLabel} htmlFor={numberId}>
           Number
         </label>
         <Field
           className={css.formField}
           type="tel"
-          name="phoneNumber"
+          name="number"
           id={numberId}
         ></Field>
+        <ErrorMessage
+          className={css.errorMessage}
+          name="number"
+          component="span"
+        />
 
         <button className={css.formBtn} type="submit">
           Add contact
