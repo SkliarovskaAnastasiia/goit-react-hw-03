@@ -1,0 +1,31 @@
+.contactItem {
+  width: 350px;
+  border: 1px solid #213547;
+  border-radius: 4px;
+  padding: 8px 6px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contactInfoWrappper {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.contactInfo {
+  width: 140px;
+  text-align: left;
+  font-weight: 500;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.contactBtn {
+  padding: 6px;
+}
